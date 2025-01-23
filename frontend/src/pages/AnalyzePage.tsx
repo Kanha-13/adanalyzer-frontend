@@ -6,6 +6,8 @@ import AnalysisResult from "../components/AnalysisResult.tsx";
 const AnalyzePage: React.FC = () => {
   const location = useLocation();
   const [analysis, setAnalysis] = useState<string | null>(null);
+  const [rawData, setRawData] = useState<string[]>(null);
+  const [updatedAdData, setUpdatedAdData] = useState<string[]>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -16,6 +18,8 @@ const AnalyzePage: React.FC = () => {
         try {
           const response = await analyzeFile(filePath);
           setAnalysis(response.data.analysis);
+          setRawData(response.data.rawData)
+          setUpdatedAdData(response.data.updatedAdData)
         } catch (err) {
           setAnalysis("Error analyzing the file.");
         } finally {
@@ -28,8 +32,12 @@ const AnalyzePage: React.FC = () => {
 
   return (
     <div>
-      <h2>Analyzing Your Ad Data</h2>
-      {loading ? <p>Loading...</p> : <AnalysisResult analysis={analysis || "No data"} />}
+      {loading ?
+        <>
+          <h2>Analyzing Your Ad Data</h2>
+          <p>Loading...</p>
+        </> :
+        <AnalysisResult rawData={rawData || []} updatedAdData={updatedAdData || []} analysis={analysis || "No data"} />}
     </div>
   );
 };
