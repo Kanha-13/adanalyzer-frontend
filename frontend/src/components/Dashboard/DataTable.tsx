@@ -36,7 +36,8 @@ const styles = {
     boxShadow: "0 8px 16px rgba(0, 0, 0, 0.1)", 
     transition: "transform 0.3s, box-shadow 0.3s",
     cursor: "pointer",
-    height: "auto"
+    height: "auto",
+    marginTop: "1rem",
   },
   cardHeader: {
     fontSize: "1.8rem",

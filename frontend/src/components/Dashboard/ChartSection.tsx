@@ -7,6 +7,7 @@ const styles = {
     padding: "2rem",
     boxShadow: "0 8px 16px rgba(0, 0, 0, 0.1)",
     flex: "1 1 100%",
+    marginTop: "1rem",
   },
   cardHeader: {
     fontSize: "1.8rem",

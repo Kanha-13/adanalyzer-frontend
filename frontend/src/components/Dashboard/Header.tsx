@@ -1,7 +1,7 @@
 import React from "react";
 const styles = {
   header: {
-    marginBottom: "2rem",
+    marginBottom: "1rem",
     textAlign: "center",
     color: "#1A4E63",
   },

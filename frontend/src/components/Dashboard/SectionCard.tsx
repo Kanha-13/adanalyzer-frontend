@@ -8,6 +8,8 @@ const styles = {
     boxShadow: "0 8px 16px rgba(0, 0, 0, 0.1)",
     flex: "1 1 calc(50% - 1rem)",
     margin: "0.5rem",
+    marginTop: "1rem",
+
   },
   cardHeader: {
     fontSize: "1.8rem",

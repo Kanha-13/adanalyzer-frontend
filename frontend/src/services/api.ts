@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://192.168.29.90:5000",
+  baseURL: "http://192.168.29.71:5000",
   headers: {
     "Content-Type": "application/json",
   },
@@ -18,3 +18,6 @@ export const uploadFile = async (file: FormData) => {
 
 export const analyzeFile = (filePath: string) =>
   api.post("/analyze", { filePath });
+
+export const getQueryResponse = (query: string, filePath) =>
+  api.post("/query", { query, filePath });
