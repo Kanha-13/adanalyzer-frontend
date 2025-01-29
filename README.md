@@ -13,6 +13,28 @@
 
 ---
 
+## 🏗️ Architecture Diagram  
+
+Below is a simplified diagram illustrating the system's architecture and how different components interact:  
+
+```
++------------------+       +------------------+       +------------------+
+|  React Frontend  | <-->  |  Node.js Backend | <-->  |  LangChain Agent |
++------------------+       +------------------+       +------------------+
+                                                           |
+                                                           v
+                                                  +------------------+
+                                                  |     LLM API      |
+                                                  +------------------+
+```
+
+### **Explanation:**  
+- The **React Frontend** provides the UI for users to upload CSV files, visualize data, and interact with the AI-powered chat assistant.  
+- The **Node.js Backend** processes requests from the frontend, manages authentication, and interacts with the LangGraph agent.  
+- The **LangChain Agent** processes natural language queries and sends them to the **LLM API** for intelligent insights.  
+
+---
+
 ## 🛠 Prerequisites  
 Ensure you have the following installed before setting up the project:  
 
@@ -128,6 +150,28 @@ Once running, the frontend will be available at **[http://localhost:3000](http:/
 
 ---
 
+## 🔎 Assumptions  
+
+- The **target audience** for this application consists of **digital marketers** and **business analysts** who need insights into their ad campaigns.  
+- CSV files uploaded must follow a **specific format**, including columns like `keyword`, `ctr`, `acos`, and `roas`.  
+- The **LLM-powered chat assistant** assumes users will ask structured queries related to ad performance (e.g., "What are my best-performing keywords?").  
+- The backend and frontend are expected to be deployed in **Docker containers** for consistent performance.  
+- The **LLM API** used (e.g., OpenAI, Anthropic, or other providers) should support **real-time processing** of queries.  
+
+---
+
+## 🔮 Future Improvements  
+
+Here are some potential features that could enhance AdAnalyzer in the future:  
+
+1️⃣ **Automated CSV Formatting** – Detect and fix missing or incorrect columns automatically before analysis.  
+2️⃣ **Multi-LLM Support** – Allow users to select from different LLM APIs (e.g., OpenAI, Cohere, or Claude).  
+3️⃣ **Ad Performance Prediction** – Implement **machine learning** models to predict future ad performance trends.  
+4️⃣ **Multi-Tenant Support** – Enable **user authentication** so different users can store and track their analysis separately.  
+5️⃣ **Exportable Reports** – Generate and download **PDF or Excel reports** summarizing ad performance insights.  
+
+---
+
 ## 🤝 Contributing  
 
 We welcome contributions! 🚀  
@@ -153,4 +197,4 @@ This project is licensed under the **MIT License**.
 
 ---
 
-🚀 _For backend setup, check out the [AdAnalyzer Backend](https://github.com/Kanha-13/adanalyzer-backend)._ 🚀 
+🚀 _For backend setup, check out the [AdAnalyzer Backend](https://github.com/Kanha-13/adanalyzer-backend)._ 🚀  
