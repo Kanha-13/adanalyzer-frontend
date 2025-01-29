@@ -17,16 +17,7 @@
 
 Below is a simplified diagram illustrating the system's architecture and how different components interact:  
 
-```
-+------------------+       +------------------+       +------------------+
-|  React Frontend  | <-->  |  Node.js Backend | <-->  |  LangChain Agent |
-+------------------+       +------------------+       +------------------+
-                                                           |
-                                                           v
-                                                  +------------------+
-                                                  |     LLM API      |
-                                                  +------------------+
-```
+![Screenshot](readme_docs/architecture.png)
 
 ### **Explanation:**  
 - The **React Frontend** provides the UI for users to upload CSV files, visualize data, and interact with the AI-powered chat assistant.  
