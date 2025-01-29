@@ -1,109 +1,156 @@
-AdAnalyzer Frontend
-Overview
-AdAnalyzer Frontend is a React TypeScript application built with Create React App (CRA). It allows users to upload CSV files containing ad performance data and analyze the results. The application provides:
+# 🚀 AdAnalyzer Frontend  
 
-Detailed analysis of ad performance, categorizing keywords into well-performing and underperforming groups.
-A simple chart to visualize raw data.
-A chat-powered AI assistant that lets users query an LLM (Large Language Model) regarding their ad performance.
-Dockerized environment to ensure smooth operation across different systems.
-This application is part of the AdAnalyzer system, which includes both a frontend and a backend. Docker Compose is used to orchestrate both applications, making it easy to build images and manage containers.
+## 📌 Overview  
+**AdAnalyzer Frontend** is a **React TypeScript** application built with **Create React App (CRA)**. It allows users to upload **CSV files** containing ad performance data and analyze the results effectively.  
 
-Prerequisites
-Ensure the following dependencies are installed before setting up the project:
+### 🔥 Features  
+✅ **Detailed Ad Performance Analysis** – Categorizes keywords into **well-performing** and **underperforming** groups.  
+✅ **Data Visualization** – Displays raw data through an **interactive chart**.  
+✅ **AI-Powered Chat Assistant** – Ask queries about your ad performance via an **LLM-powered chat**.  
+✅ **Dockerized Environment** – Ensures smooth operation across different systems using **Docker**.  
 
-Docker (For containerization)
-Docker Compose (For managing multiple containers)
-Node.js (For development and package management)
-npm (Node Package Manager)
-Create React App (CRA) (For bootstrapping the frontend)
-Installation & Setup
-Step 1: Create a Root Project Directory
-sh
-Copy
-Edit
-mkdir adanalyzer
-cd adanalyzer
-Step 2: Create docker-compose.yml
-Inside the adanalyzer folder, create a file named docker-compose.yml and copy-paste the following content into it:
+> This application is part of the **AdAnalyzer** system, which includes both a **frontend** and **backend**.  
 
-yaml
-Copy
-Edit
-version: '3.8'
+---
 
-services:
-  frontend:
-    build: ./adanalyzer-frontend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
-    volumes:
-      - ./adanalyzer-frontend:/app
-      - /app/node_modules
-    environment:
-      - REACT_APP_BACKEND_URL=http://localhost:5000
+## 🛠 Prerequisites  
+Ensure you have the following installed before setting up the project:  
 
-  backend:
-    build: ./adanalyzer-backend
-    ports:
-      - "5000:5000"
-    volumes:
-      - ./adanalyzer-backend:/app
-      - /app/node_modules
-    environment:
-      - PORT=5000
-Step 3: Clone the Frontend and Backend Repositories
-Inside the adanalyzer folder, clone both repositories:
+- **[Docker](https://www.docker.com/)** – For containerization  
+- **[Docker Compose](https://docs.docker.com/compose/)** – For managing multiple containers  
+- **[Node.js](https://nodejs.org/)** – For development and package management  
+- **[npm](https://www.npmjs.com/)** – Node Package Manager  
+- **[Create React App (CRA)](https://create-react-app.dev/)** – For bootstrapping the frontend  
 
-sh
-Copy
-Edit
+---
+
+## 🚀 Installation & Setup  
+
+### 1️⃣ Clone the Frontend Repository  
+```sh
 git clone https://github.com/Kanha-13/adanalyzer-frontend
+cd adanalyzer-frontend
+```
+
+### 2️⃣ Install Dependencies  
+```sh
+npm install
+```
+
+### 3️⃣ Start the Development Server  
+```sh
+npm start
+```
+The application will be available at **[http://localhost:3000](http://localhost:3000)**.  
+
+---
+
+## 🌍 Environment Variables  
+
+Before running the frontend, set up environment variable files inside `adanalyzer-frontend/`.  
+
+#### **Development (`.env`)**  
+```env
+REACT_APP_API_URL=http://localhost:5000
+```
+
+#### **Production (`.env.production`)**  
+```env
+REACT_APP_API_URL=http://localhost:5000
+```
+
+This ensures that the frontend correctly communicates with the backend.  
+
+---
+
+## 🐳 Running with Docker  
+
+If you want to run the frontend inside a **Docker container**, follow these steps:  
+
+### 1️⃣ Create a Root Project Directory  
+```sh
+mkdir adanalyzer && cd adanalyzer
+```
+
+### 2️⃣ Set Up `docker-compose.yml`  
+Create a file named `docker-compose.yml` inside `adanalyzer/` and add the following content:  
+
+```yaml
+version: '3.8'
+services:
+  react-app:
+    build:
+      context: ./adanalyzer-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80" # Map React app's port 80 to host's port 3000
+    depends_on:
+      - nodejs-app
+
+  nodejs-app:
+    build:
+      context: ./adanalyzer-backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000" # Map Node.js app's port 5000 to host's port 5000
+    environment:
+      - NODE_ENV=production
+
+```
+
+👉 **Note:** The frontend depends on the backend. Refer to the **[backend repository](https://github.com/Kanha-13/adanalyzer-backend)** for backend setup instructions.  
+
+### 3️⃣ Clone the Backend Repository  
+```sh
 git clone https://github.com/Kanha-13/adanalyzer-backend
-Step 4: Build and Run the Containers
-1. Build the Docker images
+```
 
-sh
-Copy
-Edit
+### 4️⃣ Build and Run the Containers  
+#### 🏗 Build Docker Images  
+```sh
 docker-compose build
-2. Start the containers
-
-sh
-Copy
-Edit
+```  
+#### 🚀 Start the Containers  
+```sh
 docker-compose up
-The application will be available at http://localhost:3000.
+```  
 
-Step 5: Configure Environment Variables
-Before running the frontend, create environment variable files inside the frontend directory (adanalyzer-frontend/).
+Once running, the frontend will be available at **[http://localhost:3000](http://localhost:3000)**.  
 
-For Development (.env file)
-Inside adanalyzer-frontend/, create a file named .env and add:
+---
 
-env
-Copy
-Edit
-REACT_APP_API_URL=http://localhost:5000
-For Production (.env.production file)
-Inside adanalyzer-frontend/, create a file named .env.production and add:
+## 🏆 Usage  
 
-env
-Copy
-Edit
-REACT_APP_API_URL=http://localhost:5000
-This ensures that the frontend correctly communicates with the backend.
+1️⃣ **Upload** your CSV file containing ad performance data.  
+2️⃣ Click **"Analyze"** to categorize keywords into **well-performing** and **underperforming** groups.  
+3️⃣ **Visualize** data with an interactive **chart**.  
+4️⃣ Use the **AI-powered chat assistant** to query ad performance insights.  
 
-Usage
-Upload your CSV file with ad performance data.
-Click "Analyze" to get insights into well-performing and underperforming keywords.
-View charts mapping raw data.
-Use the AI-powered chat tab to ask queries about your ad performance.
-Contributing
-Feel free to fork the repository, submit issues, or make pull requests. Contributions are welcome!
+---
 
-License
-This project is licensed under the MIT License.
+## 🤝 Contributing  
 
-This README covers the frontend setup. Do you want me to write a separate README for the backend as well? 🚀
+We welcome contributions! 🚀  
+
+💡 **Ways to Contribute:**  
+- Fork the repository  
+- Submit issues  
+- Create pull requests  
+
+🔗 **Fork the repo & start contributing:**  
+```sh
+git clone https://github.com/Kanha-13/adanalyzer-frontend.git
+cd adanalyzer-frontend
+npm install
+npm start
+```
+
+---
+
+## 📜 License  
+
+This project is licensed under the **MIT License**.  
+
+---
+
+🚀 _For backend setup, check out the [AdAnalyzer Backend](https://github.com/Kanha-13/adanalyzer-backend)._ 🚀 
