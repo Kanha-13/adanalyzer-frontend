@@ -1,46 +1,109 @@
-# Getting Started with Create React App
+AdAnalyzer Frontend
+Overview
+AdAnalyzer Frontend is a React TypeScript application built with Create React App (CRA). It allows users to upload CSV files containing ad performance data and analyze the results. The application provides:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Detailed analysis of ad performance, categorizing keywords into well-performing and underperforming groups.
+A simple chart to visualize raw data.
+A chat-powered AI assistant that lets users query an LLM (Large Language Model) regarding their ad performance.
+Dockerized environment to ensure smooth operation across different systems.
+This application is part of the AdAnalyzer system, which includes both a frontend and a backend. Docker Compose is used to orchestrate both applications, making it easy to build images and manage containers.
 
-## Available Scripts
+Prerequisites
+Ensure the following dependencies are installed before setting up the project:
 
-In the project directory, you can run:
+Docker (For containerization)
+Docker Compose (For managing multiple containers)
+Node.js (For development and package management)
+npm (Node Package Manager)
+Create React App (CRA) (For bootstrapping the frontend)
+Installation & Setup
+Step 1: Create a Root Project Directory
+sh
+Copy
+Edit
+mkdir adanalyzer
+cd adanalyzer
+Step 2: Create docker-compose.yml
+Inside the adanalyzer folder, create a file named docker-compose.yml and copy-paste the following content into it:
 
-### `npm start`
+yaml
+Copy
+Edit
+version: '3.8'
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+services:
+  frontend:
+    build: ./adanalyzer-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./adanalyzer-frontend:/app
+      - /app/node_modules
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:5000
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+  backend:
+    build: ./adanalyzer-backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./adanalyzer-backend:/app
+      - /app/node_modules
+    environment:
+      - PORT=5000
+Step 3: Clone the Frontend and Backend Repositories
+Inside the adanalyzer folder, clone both repositories:
 
-### `npm test`
+sh
+Copy
+Edit
+git clone https://github.com/Kanha-13/adanalyzer-frontend
+git clone https://github.com/Kanha-13/adanalyzer-backend
+Step 4: Build and Run the Containers
+1. Build the Docker images
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+sh
+Copy
+Edit
+docker-compose build
+2. Start the containers
 
-### `npm run build`
+sh
+Copy
+Edit
+docker-compose up
+The application will be available at http://localhost:3000.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Step 5: Configure Environment Variables
+Before running the frontend, create environment variable files inside the frontend directory (adanalyzer-frontend/).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+For Development (.env file)
+Inside adanalyzer-frontend/, create a file named .env and add:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+env
+Copy
+Edit
+REACT_APP_API_URL=http://localhost:5000
+For Production (.env.production file)
+Inside adanalyzer-frontend/, create a file named .env.production and add:
 
-### `npm run eject`
+env
+Copy
+Edit
+REACT_APP_API_URL=http://localhost:5000
+This ensures that the frontend correctly communicates with the backend.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Usage
+Upload your CSV file with ad performance data.
+Click "Analyze" to get insights into well-performing and underperforming keywords.
+View charts mapping raw data.
+Use the AI-powered chat tab to ask queries about your ad performance.
+Contributing
+Feel free to fork the repository, submit issues, or make pull requests. Contributions are welcome!
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+License
+This project is licensed under the MIT License.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This README covers the frontend setup. Do you want me to write a separate README for the backend as well? 🚀
